@@ -1,0 +1,7 @@
+C:\projects\stone\stone.framework\Stone.Framework.Http\bin\Debug\netstandard2.0\Stone.Framework.Http.deps.json
+C:\projects\stone\stone.framework\Stone.Framework.Http\bin\Debug\netstandard2.0\Stone.Framework.Http.dll
+C:\projects\stone\stone.framework\Stone.Framework.Http\obj\Debug\netstandard2.0\Stone.Framework.Http.csprojAssemblyReference.cache
+C:\projects\stone\stone.framework\Stone.Framework.Http\obj\Debug\netstandard2.0\Stone.Framework.Http.csproj.CoreCompileInputs.cache
+C:\projects\stone\stone.framework\Stone.Framework.Http\obj\Debug\netstandard2.0\Stone.Framework.Http.AssemblyInfoInputs.cache
+C:\projects\stone\stone.framework\Stone.Framework.Http\obj\Debug\netstandard2.0\Stone.Framework.Http.AssemblyInfo.cs
+C:\projects\stone\stone.framework\Stone.Framework.Http\bin\Debug\netstandard2.0\Stone.Framework.Message.dll
