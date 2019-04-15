@@ -4,6 +4,6 @@ namespace Stone.Framework.Message.Abstractions
 {
     public abstract class BaseMessage
     {
-        public Guid MessageId { get; set; }
+        public Guid MessageId { get; protected set; }
     }
 }

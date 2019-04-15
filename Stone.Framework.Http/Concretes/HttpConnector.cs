@@ -13,7 +13,7 @@ namespace Stone.Framework.Http.Concretes
 
         public void SetAddress(string address) => Address = address;
 
-        public async Task<T> GetAsync<T>(string uri) where T : ResponseMessage
+        public async Task<ResponseMessage<T>> GetAsync<T>(string uri) where T : ResponseMessage<T>
         {
             HttpResponseMessage response = null;
 
@@ -25,7 +25,7 @@ namespace Stone.Framework.Http.Concretes
             return DefaultHandler<T>(response);
         }
 
-        public async Task<T> PostAsync<T>(string uri, RequestMessage request) where T : ResponseMessage
+        public async Task<ResponseMessage<T>> PostAsync<T>(string uri, RequestMessage request) where T : ResponseMessage<T>
         {
             HttpContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             HttpResponseMessage response = null;
@@ -38,16 +38,18 @@ namespace Stone.Framework.Http.Concretes
             return DefaultHandler<T>(response);
         }
 
-        public T DefaultHandler<T>(HttpResponseMessage httpResponse) where T : ResponseMessage
+        public ResponseMessage<T> DefaultHandler<T>(HttpResponseMessage httpResponse) where T : ResponseMessage<T>
         {
-            ResponseMessage response = new ResponseMessage();
+            ResponseMessage<T> response = new ResponseMessage<T>();
 
             if (!httpResponse.IsSuccessStatusCode)
                 response.Messages.Add(httpResponse.Content.ToString());
             else
-                response = JsonConvert.DeserializeObject<T>(httpResponse.Content.ToString());
+                response.Data = JsonConvert.DeserializeObject<T>(httpResponse.Content.ToString());
 
-            return (T)response;
+            response.StatusCode = httpResponse.StatusCode;
+
+            return (ResponseMessage<T>)response;
         }
     }
 }
