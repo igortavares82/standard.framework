@@ -1,45 +1,49 @@
 ﻿using Firebase.Database;
-using Microsoft.Extensions.DependencyInjection;
+using Firebase.Database.Query;
+using Microsoft.Extensions.Options;
 using Stone.Framework.Data.Abstractions;
+using Stone.Framework.Data.Options;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Stone.Framework.Data.Concretes
 {
     public class FirebaseRepository<T> : IRepository<T> where T : class
     {
+        //https://github.com/step-up-labs/firebase-authentication-dotnet
+
         protected FirebaseClient Firebase { get; }
+        private IOptions<FirebaseClientOptions> ClientOptions { get; }
 
-        public FirebaseRepository(string uri, FirebaseOptions options = null)
+        public FirebaseRepository(IOptions<FirebaseClientOptions> clientOptions, FirebaseOptions firebaseOptions = null)
         {
-            Firebase = new FirebaseClient("", options);
+            ClientOptions = clientOptions;
+            Firebase = new FirebaseClient(clientOptions.Value.Uri, firebaseOptions);
         }
 
-        public void Delete(T model)
+        public async Task Delete(T model)
         {
-            throw new NotImplementedException();
+            await Firebase.Child(ClientOptions.Value.Child).DeleteAsync();
         }
 
-        public IEnumerable<T> Get()
+        public async Task<IEnumerable<T>> Get(Func<T, bool> predicate)
         {
-            throw new NotImplementedException();
+            Func<FirebaseObject<T>, bool> firebasePredicate = (firebaseObject) => predicate(firebaseObject.Object);
+            IReadOnlyCollection<FirebaseObject<T>> collection = await Firebase.Child(ClientOptions.Value.Child).OnceAsync<T>();
+
+            return collection.Where(firebasePredicate).Select(it => it.Object);
         }
 
-        public IEnumerable<T> Get(Expression<Func<T, bool>> expression)
+        public async Task Insert(T model)
         {
-            throw new NotImplementedException();
+            await Firebase.Child(ClientOptions.Value.Child).PostAsync(model);
         }
 
-        public void Insert(T model)
+        public async Task Update(T model)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(T model)
-        {
-            throw new NotImplementedException();
+            await Firebase.Child(ClientOptions.Value.Child).PutAsync(model);
         }
     }
 }
