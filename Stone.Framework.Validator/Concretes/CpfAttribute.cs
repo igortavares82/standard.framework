@@ -10,7 +10,7 @@ namespace Stone.Framework.Validator.Concretes
             string cpf = value as string;
 
             if (string.IsNullOrEmpty(cpf))
-                return false;
+                return true;
 
             int[] mt1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] mt2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };

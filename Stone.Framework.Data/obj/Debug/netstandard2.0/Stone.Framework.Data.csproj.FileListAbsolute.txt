@@ -6,4 +6,3 @@ C:\projects\stone\stone.framework\Stone.Framework.Data\obj\Debug\netstandard2.0\
 C:\projects\stone\stone.framework\Stone.Framework.Data\bin\Debug\netstandard2.0\Stone.Framework.Data.pdb
 C:\projects\stone\stone.framework\Stone.Framework.Data\obj\Debug\netstandard2.0\Stone.Framework.Data.dll
 C:\projects\stone\stone.framework\Stone.Framework.Data\obj\Debug\netstandard2.0\Stone.Framework.Data.pdb
-C:\projects\stone\stone.framework\Stone.Framework.Data\obj\Debug\netstandard2.0\Stone.Framework.Data.csprojAssemblyReference.cache

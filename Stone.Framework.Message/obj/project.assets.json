@@ -182,9 +182,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\stone\\stone.framework\\Stone.Framework.Message\\Stone.Framework.Message.csproj",
-      "projectName": "Stone.Framework.Message",
-      "projectPath": "C:\\projects\\stone\\stone.framework\\Stone.Framework.Message\\Stone.Framework.Message.csproj",
+      "projectUniqueName": "C:\\projects\\stone\\stone.framework\\Stone.Framework.Message\\Stone.Framework.Result.csproj",
+      "projectName": "Stone.Framework.Result",
+      "projectPath": "C:\\projects\\stone\\stone.framework\\Stone.Framework.Message\\Stone.Framework.Result.csproj",
       "packagesPath": "C:\\Users\\Igor Tavares Barata\\.nuget\\packages\\",
       "outputPath": "C:\\projects\\stone\\stone.framework\\Stone.Framework.Message\\obj\\",
       "projectStyle": "PackageReference",

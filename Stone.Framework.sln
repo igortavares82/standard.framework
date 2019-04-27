@@ -5,13 +5,13 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stone.Framework.Http", "Stone.Framework.Http\Stone.Framework.Http.csproj", "{171D97EA-380B-423F-A3A5-3A029139A14B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stone.Framework.Message", "Stone.Framework.Message\Stone.Framework.Message.csproj", "{2F18CFEC-049F-4C33-9580-72750616E781}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stone.Framework.Result", "Stone.Framework.Message\Stone.Framework.Result.csproj", "{2F18CFEC-049F-4C33-9580-72750616E781}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stone.Framework.Data", "Stone.Framework.Data\Stone.Framework.Data.csproj", "{C104F6BC-A5E7-4F46-9E60-E6B3CAD1E87F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stone.Framework.Filter", "Stone.Framework.Filter\Stone.Framework.Filter.csproj", "{8BF05805-D280-46B9-838F-42C4918E8AE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stone.Framework.Filter", "Stone.Framework.Filter\Stone.Framework.Filter.csproj", "{8BF05805-D280-46B9-838F-42C4918E8AE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stone.Framework.Validator", "Stone.Framework.Validator\Stone.Framework.Validator.csproj", "{0BC8D67D-49E8-4303-A16F-B3B6F91B2067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stone.Framework.Validator", "Stone.Framework.Validator\Stone.Framework.Validator.csproj", "{0BC8D67D-49E8-4303-A16F-B3B6F91B2067}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

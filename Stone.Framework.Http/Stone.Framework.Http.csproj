@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Stone.Framework.Message\Stone.Framework.Message.csproj" />
+    <ProjectReference Include="..\Stone.Framework.Message\Stone.Framework.Result.csproj" />
   </ItemGroup>
 
 </Project>

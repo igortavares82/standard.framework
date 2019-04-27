@@ -9,6 +9,6 @@ namespace Stone.Framework.Data.Options
         public string Child { get; set; }
         public string AuthToken { get; set; }
 
-        public void SetAuthToken() => base.AuthTokenAsyncFactory = () => Task.FromResult(AuthToken);
+        public void CallTokenFactory() => base.AuthTokenAsyncFactory = () => Task.FromResult(AuthToken);
     }
 }
