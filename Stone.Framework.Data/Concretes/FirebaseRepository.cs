@@ -45,5 +45,11 @@ namespace Stone.Framework.Data.Concretes
         {
             await Firebase.Child(ClientOptions.Value.Child).PutAsync(model);
         }
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            IReadOnlyCollection<FirebaseObject<T>> collection = await Firebase.Child(ClientOptions.Value.Child).OnceAsync<T>();
+            return collection.Select(it => it.Object);
+        }
     }
 }
