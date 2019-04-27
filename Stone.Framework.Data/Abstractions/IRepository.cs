@@ -7,9 +7,9 @@ namespace Stone.Framework.Data.Abstractions
 {
     public interface IRepository<T> where T : class
     {
-        Task<IEnumerable<T>> Get(Func<T, bool> predicate);
-        Task Insert(T model);
-        Task Update(T model);
-        Task Delete(T model);
+        Task<IEnumerable<T>> GetAsync(Func<T, bool> predicate);
+        Task InsertAsync(T model);
+        Task UpdateAsync(T model);
+        Task DeleteAsync(T model);
     }
 }

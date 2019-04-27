@@ -15,20 +15,20 @@ namespace Stone.Framework.Data.Concretes
         //https://github.com/step-up-labs/firebase-authentication-dotnet
 
         protected FirebaseClient Firebase { get; }
-        private IOptions<FirebaseClientOptions> ClientOptions { get; }
+        protected IOptions<FirebaseClientOptions> ClientOptions { get; }
 
-        public FirebaseRepository(IOptions<FirebaseClientOptions> clientOptions, FirebaseOptions firebaseOptions = null)
+        public FirebaseRepository(IOptions<FirebaseClientOptions> clientOptions)
         {
             ClientOptions = clientOptions;
-            Firebase = new FirebaseClient(clientOptions.Value.Uri, firebaseOptions);
+            Firebase = new FirebaseClient(clientOptions.Value.Uri, clientOptions.Value);
         }
 
-        public async Task Delete(T model)
+        public async Task DeleteAsync(T model)
         {
             await Firebase.Child(ClientOptions.Value.Child).DeleteAsync();
         }
 
-        public async Task<IEnumerable<T>> Get(Func<T, bool> predicate)
+        public async Task<IEnumerable<T>> GetAsync(Func<T, bool> predicate)
         {
             Func<FirebaseObject<T>, bool> firebasePredicate = (firebaseObject) => predicate(firebaseObject.Object);
             IReadOnlyCollection<FirebaseObject<T>> collection = await Firebase.Child(ClientOptions.Value.Child).OnceAsync<T>();
@@ -36,12 +36,12 @@ namespace Stone.Framework.Data.Concretes
             return collection.Where(firebasePredicate).Select(it => it.Object);
         }
 
-        public async Task Insert(T model)
+        public async Task InsertAsync(T model)
         {
             await Firebase.Child(ClientOptions.Value.Child).PostAsync(model);
         }
 
-        public async Task Update(T model)
+        public async Task UpdateAsync(T model)
         {
             await Firebase.Child(ClientOptions.Value.Child).PutAsync(model);
         }
