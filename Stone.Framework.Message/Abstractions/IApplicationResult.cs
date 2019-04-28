@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Net;
-using System.Text;
 
 namespace Stone.Framework.Result.Abstractions
 {
-    public interface IApplicationResult<T>
+    public interface IApplicationResult<T> : IActionResult
     {
         T Data { get; set; }
         HttpStatusCode StatusCode { get; set; }

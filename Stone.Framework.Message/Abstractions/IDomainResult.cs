@@ -6,7 +6,7 @@ namespace Stone.Framework.Result.Abstractions
     public interface IDomainResult<T>
     {
         T Data { get; set; }
-        DomainResultType ResulType { get; }
+        DomainResultType ResultType { get; set; }
         List<string> Messages { get; set; }
     }
 }

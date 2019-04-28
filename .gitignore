@@ -2,3 +2,10 @@
 .vs/Stone.Framework/v15/Server/sqlite3/storage.ide-shm
 .vs/Stone.Framework/v15/Server/sqlite3/storage.ide
 Stone.Framework.Message/obj/Debug/netstandard2.0/Stone.Framework.Result.csproj.FileListAbsolute.txt
+Stone.Framework.Message/obj/project.assets.json
+Stone.Framework.Message/obj/Debug/netstandard2.0/Stone.Framework.Result.csproj.CopyComplete
+Stone.Framework.Message/bin/Debug/netstandard2.0/Stone.Framework.Result.deps.json
+Stone.Framework.Message/bin/Debug/netstandard2.0/Newtonsoft.Json.xml
+Stone.Framework.Message/bin/Debug/netstandard2.0/Microsoft.AspNetCore.Mvc.Abstractions.xml
+Stone.Framework.Http/obj/project.assets.json
+.vs/Stone.Framework/DesignTimeBuild/.dtbcache

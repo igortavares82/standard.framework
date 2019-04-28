@@ -14,7 +14,7 @@ namespace Stone.Framework.Result.Mappers
             {
                 Data = mapper(domainResult.Data),
                 Messages = domainResult.Messages,
-                StatusCode = GetStatusCode(domainResult.ResulType)
+                StatusCode = GetStatusCode(domainResult.ResultType)
             };
 
             return applicationResult;
