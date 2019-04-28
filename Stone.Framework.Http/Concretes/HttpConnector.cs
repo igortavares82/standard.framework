@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Stone.Framework.Http.Abstractions;
-using Stone.Framework.Message.Concretes;
+using Stone.Framework.Result.Abstractions;
+using Stone.Framework.Result.Concretes;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace Stone.Framework.Http.Concretes
 
         public void SetAddress(string address) => Address = address;
 
-        public async Task<ApplicationResult<T>> GetAsync<T>(string uri) where T : ApplicationResult<T>
+        public async Task<IApplicationResult<TResponse>> GetAsync<TResponse>(string uri)
         {
             HttpResponseMessage response = null;
 
@@ -22,10 +23,10 @@ namespace Stone.Framework.Http.Concretes
                 response = await client.GetAsync(uri);
             }
 
-            return DefaultHandler<T>(response);
+            return DefaultHandler<TResponse>(response);
         }
 
-        public async Task<ApplicationResult<T>> PostAsync<T>(string uri, RequestMessage request) where T : ApplicationResult<T>
+        public async Task<IApplicationResult<TResponse>> PostAsync<TRequest, TResponse>(string uri, TRequest request)
         {
             HttpContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             HttpResponseMessage response = null;
@@ -35,21 +36,21 @@ namespace Stone.Framework.Http.Concretes
                 response = await client.PostAsync(uri, content);
             }
 
-            return DefaultHandler<T>(response);
+            return DefaultHandler<TResponse>(response);
         }
 
-        public ApplicationResult<T> DefaultHandler<T>(HttpResponseMessage httpResponse) where T : ApplicationResult<T>
+        private IApplicationResult<TResponse> DefaultHandler<TResponse>(HttpResponseMessage httpResponse)
         {
-            ApplicationResult<T> response = new ApplicationResult<T>();
+            IApplicationResult<TResponse> response = new ApplicationResult<TResponse>();
 
             if (!httpResponse.IsSuccessStatusCode)
                 response.Messages.Add(httpResponse.Content.ToString());
             else
-                response.Data = JsonConvert.DeserializeObject<T>(httpResponse.Content.ToString());
+                response.Data = JsonConvert.DeserializeObject<TResponse>(httpResponse.Content.ToString());
 
             response.StatusCode = httpResponse.StatusCode;
 
-            return (ApplicationResult<T>)response;
+            return response;
         }
     }
 }

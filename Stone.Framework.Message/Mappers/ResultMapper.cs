@@ -10,7 +10,7 @@ namespace Stone.Framework.Result.Mappers
     {
         public static IApplicationResult<TApplication> MapFromDomainResult<TDomain, TApplication>(IDomainResult<TDomain> domainResult, Func<TDomain,TApplication> mapper)
         {
-            IApplicationResult<TApplication> applicationResult = new ApplicationResult<TApplication>()
+            Abstractions.IApplicationResult<TApplication> applicationResult = new Concretes.IApplicationResult<TApplication>()
             {
                 Data = mapper(domainResult.Data),
                 Messages = domainResult.Messages,

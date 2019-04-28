@@ -1,11 +1,11 @@
-﻿using Stone.Framework.Message.Concretes;
+﻿using Stone.Framework.Result.Abstractions;
 using System.Threading.Tasks;
 
 namespace Stone.Framework.Http.Abstractions
 {
     public interface IHttpConnector
     {
-        Task<ApplicationResult<T>> GetAsync<T>(string uri) where T : ApplicationResult<T>;
-        Task<ApplicationResult<T>> PostAsync<T>(string uri, RequestMessage request) where T : ApplicationResult<T>;
+        Task<IApplicationResult<TResponse>> GetAsync<TResponse>(string uri);
+        Task<IApplicationResult<TResponse>> PostAsync<TRequest, TResponse>(string uri, TRequest request);
     }
 }
