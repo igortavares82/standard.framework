@@ -2,6 +2,7 @@
 using Stone.Framework.Http.Abstractions;
 using Stone.Framework.Result.Abstractions;
 using Stone.Framework.Result.Concretes;
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,15 +11,15 @@ namespace Stone.Framework.Http.Concretes
 {
     public class HttpConnector : IHttpConnector
     {
-        public string Address { get; private set; }
+        public Uri Address { get; private set; }
 
-        public void SetAddress(string address) => Address = address;
+        public void SetAddress(string address) => Address = new Uri(address);
 
         public async Task<IApplicationResult<TResponse>> GetAsync<TResponse>(string uri)
         {
             HttpResponseMessage response = null;
 
-            using (HttpClient client = new HttpClient())
+            using (HttpClient client = new HttpClient() { BaseAddress = Address })
             {
                 response = await client.GetAsync(uri);
             }
@@ -31,7 +32,7 @@ namespace Stone.Framework.Http.Concretes
             HttpContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             HttpResponseMessage response = null;
 
-            using (HttpClient client = new HttpClient())
+            using (HttpClient client = new HttpClient() { BaseAddress = Address })
             {
                 response = await client.PostAsync(uri, content);
             }
