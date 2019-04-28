@@ -8,7 +8,7 @@ namespace Stone.Framework.Result.Abstractions
     {
         T Data { get; set; }
         HttpStatusCode StatusCode { get; set; }
-        List<string> Messages { get; set; }
+        List<string> Messages { get; }
 
         void SetStatusCode(HttpStatusCode statusCode);
     }

@@ -9,3 +9,13 @@ Stone.Framework.Message/bin/Debug/netstandard2.0/Newtonsoft.Json.xml
 Stone.Framework.Message/bin/Debug/netstandard2.0/Microsoft.AspNetCore.Mvc.Abstractions.xml
 Stone.Framework.Http/obj/project.assets.json
 .vs/Stone.Framework/DesignTimeBuild/.dtbcache
+Stone.Framework.Filter/obj/project.assets.json
+Stone.Framework.Filter/obj/Debug/netstandard2.0/Stone.Framework.Filter.csproj.FileListAbsolute.txt
+Stone.Framework.Filter/obj/Debug/netstandard2.0/Stone.Framework.Filter.csproj.CopyComplete
+Stone.Framework.Filter/bin/Debug/netstandard2.0/Stone.Framework.Filter.deps.json
+Stone.Framework.Extension/obj/Stone.Framework.Extension.csproj.nuget.g.targets
+Stone.Framework.Extension/obj/Stone.Framework.Extension.csproj.nuget.g.props
+Stone.Framework.Extension/obj/Debug/netstandard2.0/Stone.Framework.Extension.csproj.FileListAbsolute.txt
+Stone.Framework.Extension/obj/Debug/netstandard2.0/Stone.Framework.Extension.AssemblyInfo.cs
+Stone.Framework.Extension/obj/project.assets.json
+Stone.Framework.Data/obj/Debug/netstandard2.0/Stone.Framework.Data.csproj.FileListAbsolute.txt

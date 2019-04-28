@@ -17,6 +17,7 @@ namespace Stone.Framework.Result.Mappers
                 StatusCode = GetStatusCode(domainResult.ResultType)
             };
 
+
             return applicationResult;
         }
 

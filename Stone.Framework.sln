@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stone.Framework.Filter", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stone.Framework.Validator", "Stone.Framework.Validator\Stone.Framework.Validator.csproj", "{0BC8D67D-49E8-4303-A16F-B3B6F91B2067}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stone.Framework.Extension", "Stone.Framework.Extension\Stone.Framework.Extension.csproj", "{DCF9BE4C-D375-4DDC-A66C-1D48136E91EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0BC8D67D-49E8-4303-A16F-B3B6F91B2067}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BC8D67D-49E8-4303-A16F-B3B6F91B2067}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BC8D67D-49E8-4303-A16F-B3B6F91B2067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF9BE4C-D375-4DDC-A66C-1D48136E91EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF9BE4C-D375-4DDC-A66C-1D48136E91EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF9BE4C-D375-4DDC-A66C-1D48136E91EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF9BE4C-D375-4DDC-A66C-1D48136E91EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
