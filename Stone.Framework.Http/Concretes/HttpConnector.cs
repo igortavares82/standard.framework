@@ -11,17 +11,16 @@ namespace Stone.Framework.Http.Concretes
 {
     public class HttpConnector : IHttpConnector
     {
-        public Uri Address { get; private set; }
-
-        public void SetAddress(string address) => Address = new Uri(address);
+        public string Address { get; private set; }
+        public void SetAddress(string address) => Address = address;
 
         public async Task<IApplicationResult<TResponse>> GetAsync<TResponse>(string uri)
         {
             HttpResponseMessage response = null;
 
-            using (HttpClient client = new HttpClient() { BaseAddress = Address })
+            using (HttpClient client = new HttpClient())
             {
-                response = await client.GetAsync(uri);
+                response = await client.GetAsync(new Uri(string.Concat(Address, uri)));
             }
 
             return DefaultHandler<TResponse>(response);
@@ -32,9 +31,9 @@ namespace Stone.Framework.Http.Concretes
             HttpContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             HttpResponseMessage response = null;
 
-            using (HttpClient client = new HttpClient() { BaseAddress = Address })
+            using (HttpClient client = new HttpClient())
             {
-                response = await client.PostAsync(uri, content);
+                response = await client.PostAsync(new Uri(string.Concat(Address, uri)), content);
             }
 
             return DefaultHandler<TResponse>(response);
@@ -47,7 +46,10 @@ namespace Stone.Framework.Http.Concretes
             if (!httpResponse.IsSuccessStatusCode)
                 response.Messages.Add(httpResponse.Content.ToString());
             else
-                response.Data = JsonConvert.DeserializeObject<TResponse>(httpResponse.Content.ToString());
+            {
+                string json = httpResponse.Content.ReadAsStringAsync().Result;
+                response = JsonConvert.DeserializeObject<IApplicationResult<TResponse>>(json);
+            }
 
             response.StatusCode = httpResponse.StatusCode;
 

@@ -15,7 +15,7 @@ namespace Stone.Framework.Filter.Concretes
 
             if (!context.ModelState.IsValid)
             {
-                Result.Abstractions.IApplicationResult<object> result = new Result.Concretes.IApplicationResult<object>() { StatusCode = HttpStatusCode.BadRequest };
+                IApplicationResult<object> result = new ApplicationResult<object>() { StatusCode = HttpStatusCode.BadRequest };
                 context.ModelState.Keys.ToList().ForEach(it => result.Messages.AddRange(context.ModelState[it].Errors.Select(x => $"{it}: {x.ErrorMessage}")));
 
                 context.Result = result;
