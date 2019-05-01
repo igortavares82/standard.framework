@@ -23,3 +23,9 @@ Stone.Framework.Http/obj/Debug/netstandard2.0/Stone.Framework.Http.csproj.CopyCo
 Stone.Framework.Http/bin/Debug/netstandard2.0/Stone.Framework.Http.deps.json
 Stone.Framework.Http/bin/Debug/netstandard2.0/Microsoft.AspNetCore.Mvc.Abstractions.xml
 Stone.Framework.Http/obj/Debug/netstandard2.0/Stone.Framework.Http.csproj.FileListAbsolute.txt
+Stone.Framework.Utils/obj/project.assets.json
+Stone.Framework.Utils/obj/Debug/netstandard2.0/Stone.Framework.Utils.AssemblyInfo.cs
+Stone.Framework.Utils/bin/Debug/netstandard2.0/Stone.Framework.Utils.deps.json
+Stone.Framework.Utils/obj/Stone.Framework.Utils.csproj.nuget.g.targets
+Stone.Framework.Utils/obj/Stone.Framework.Utils.csproj.nuget.g.props
+Stone.Framework.Utils/obj/Debug/netstandard2.0/Stone.Framework.Utils.csproj.FileListAbsolute.txt

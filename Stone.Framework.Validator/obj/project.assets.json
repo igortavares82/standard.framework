@@ -34,6 +34,16 @@
         "runtime": {
           "lib/netstandard2.0/System.ComponentModel.Annotations.dll": {}
         }
+      },
+      "Stone.Framework.Utils/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Stone.Framework.Utils.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Stone.Framework.Utils.dll": {}
+        }
       }
     }
   },
@@ -265,11 +275,17 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Stone.Framework.Utils/1.0.0": {
+      "type": "project",
+      "path": "../Stone.Framework.Utils/Stone.Framework.Utils.csproj",
+      "msbuildProject": "../Stone.Framework.Utils/Stone.Framework.Utils.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "NETStandard.Library >= 2.0.3",
+      "Stone.Framework.Utils >= 1.0.0",
       "System.ComponentModel.Annotations >= 4.5.0"
     ]
   },
@@ -302,7 +318,11 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\projects\\stone\\stone.framework\\Stone.Framework.Utils\\Stone.Framework.Utils.csproj": {
+              "projectPath": "C:\\projects\\stone\\stone.framework\\Stone.Framework.Utils\\Stone.Framework.Utils.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
