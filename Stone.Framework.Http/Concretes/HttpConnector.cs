@@ -14,7 +14,7 @@ namespace Stone.Framework.Http.Concretes
         public string Address { get; private set; }
         public void SetAddress(string address) => Address = address;
 
-        public async Task<IApplicationResult<TResponse>> GetAsync<TResponse>(string uri)
+        public async Task<IApplicationResult<TResponse>> GetAsync<TResponse>(string uri, bool isDefaultResponse = true)
         {
             HttpResponseMessage response = null;
 
@@ -23,10 +23,10 @@ namespace Stone.Framework.Http.Concretes
                 response = await client.GetAsync(new Uri(string.Concat(Address, uri)));
             }
 
-            return DefaultHandler<TResponse>(response);
+            return DefaultHandler<TResponse>(response, isDefaultResponse);
         }
 
-        public async Task<IApplicationResult<TResponse>> PostAsync<TRequest, TResponse>(string uri, TRequest request)
+        public async Task<IApplicationResult<TResponse>> PostAsync<TRequest, TResponse>(string uri, TRequest request, bool isDefaultResponse = true)
         {
             HttpContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             HttpResponseMessage response = null;
@@ -36,19 +36,24 @@ namespace Stone.Framework.Http.Concretes
                 response = await client.PostAsync(new Uri(string.Concat(Address, uri)), content);
             }
 
-            return DefaultHandler<TResponse>(response);
+            return DefaultHandler<TResponse>(response, isDefaultResponse);
         }
 
-        private IApplicationResult<TResponse> DefaultHandler<TResponse>(HttpResponseMessage httpResponse)
+        private IApplicationResult<TResponse> DefaultHandler<TResponse>(HttpResponseMessage httpResponse, bool isDefaultResponse)
         {
             IApplicationResult<TResponse> response = new ApplicationResult<TResponse>();
 
             if (!httpResponse.IsSuccessStatusCode)
-                response.Messages.Add(httpResponse.Content.ToString());
+                response.Messages.Add(httpResponse.Content.ReadAsStringAsync().Result);
+            else if (isDefaultResponse)
+            {
+                string json = httpResponse.Content.ReadAsStringAsync().Result;
+                response = JsonConvert.DeserializeObject<ApplicationResult<TResponse>>(json);
+            }
             else
             {
                 string json = httpResponse.Content.ReadAsStringAsync().Result;
-                response = JsonConvert.DeserializeObject<IApplicationResult<TResponse>>(json);
+                response.Data = JsonConvert.DeserializeObject<TResponse>(json);
             }
 
             response.StatusCode = httpResponse.StatusCode;
