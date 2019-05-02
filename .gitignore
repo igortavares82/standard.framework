@@ -29,3 +29,5 @@ Stone.Framework.Utils/bin/Debug/netstandard2.0/Stone.Framework.Utils.deps.json
 Stone.Framework.Utils/obj/Stone.Framework.Utils.csproj.nuget.g.targets
 Stone.Framework.Utils/obj/Stone.Framework.Utils.csproj.nuget.g.props
 Stone.Framework.Utils/obj/Debug/netstandard2.0/Stone.Framework.Utils.csproj.FileListAbsolute.txt
+Stone.Framework.Utils/obj/Debug/netstandard2.0/Stone.Framework.Utils.csproj.CopyComplete
+Stone.Framework.Utils/bin/Debug/netstandard2.0/System.ComponentModel.Annotations.xml
