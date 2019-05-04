@@ -23,7 +23,7 @@ namespace Stone.Framework.Http.Concretes
                 response = await client.GetAsync(new Uri(string.Concat(Address, uri)));
             }
 
-            return DefaultHandler<TResponse>(response, isDefaultResponse);
+            return isDefaultResponse ? DefaultHandler<TResponse>(response) : Handler<TResponse>(response);
         }
 
         public async Task<IApplicationResult<TResponse>> PostAsync<TRequest, TResponse>(string uri, TRequest request, bool isDefaultResponse = true)
@@ -36,24 +36,30 @@ namespace Stone.Framework.Http.Concretes
                 response = await client.PostAsync(new Uri(string.Concat(Address, uri)), content);
             }
 
-            return DefaultHandler<TResponse>(response, isDefaultResponse);
+            return isDefaultResponse ? DefaultHandler<TResponse>(response) : Handler<TResponse>(response);
         }
 
-        private IApplicationResult<TResponse> DefaultHandler<TResponse>(HttpResponseMessage httpResponse, bool isDefaultResponse)
+        private IApplicationResult<TResponse> DefaultHandler<TResponse>(HttpResponseMessage httpResponse)
         {
-            IApplicationResult<TResponse> response = new ApplicationResult<TResponse>();
+            ApplicationResult<TResponse> response = new ApplicationResult<TResponse>();
+            string json = httpResponse.Content.ReadAsStringAsync().Result;
+
+            response = JsonConvert.DeserializeObject<ApplicationResult<TResponse>>(json);
+            response.StatusCode = httpResponse.StatusCode;
+
+            return response;
+        }
+
+        private IApplicationResult<TResponse> Handler<TResponse>(HttpResponseMessage httpResponse)
+        {
+            ApplicationResult<TResponse> response = new ApplicationResult<TResponse>();
 
             if (!httpResponse.IsSuccessStatusCode)
                 response.Messages.Add(httpResponse.Content.ReadAsStringAsync().Result);
-            else if (isDefaultResponse)
-            {
-                string json = httpResponse.Content.ReadAsStringAsync().Result;
-                response = JsonConvert.DeserializeObject<ApplicationResult<TResponse>>(json);
-            }
             else
             {
                 string json = httpResponse.Content.ReadAsStringAsync().Result;
-                response.Data = JsonConvert.DeserializeObject<TResponse>(json);
+                response = JsonConvert.DeserializeObject<ApplicationResult<TResponse>>(json);
             }
 
             response.StatusCode = httpResponse.StatusCode;
