@@ -1,8 +1,0 @@
-C:\projects\stone\stone.framework\Stone.Framework.Validator\bin\Debug\netstandard2.0\Stone.Framework.Validator.deps.json
-C:\projects\stone\stone.framework\Stone.Framework.Validator\bin\Debug\netstandard2.0\Stone.Framework.Validator.dll
-C:\projects\stone\stone.framework\Stone.Framework.Validator\bin\Debug\netstandard2.0\Stone.Framework.Validator.pdb
-C:\projects\stone\stone.framework\Stone.Framework.Validator\obj\Debug\netstandard2.0\Stone.Framework.Validator.csproj.CoreCompileInputs.cache
-C:\projects\stone\stone.framework\Stone.Framework.Validator\obj\Debug\netstandard2.0\Stone.Framework.Validator.AssemblyInfoInputs.cache
-C:\projects\stone\stone.framework\Stone.Framework.Validator\obj\Debug\netstandard2.0\Stone.Framework.Validator.AssemblyInfo.cs
-C:\projects\stone\stone.framework\Stone.Framework.Validator\obj\Debug\netstandard2.0\Stone.Framework.Validator.dll
-C:\projects\stone\stone.framework\Stone.Framework.Validator\obj\Debug\netstandard2.0\Stone.Framework.Validator.pdb
