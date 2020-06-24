@@ -1,7 +1,7 @@
-﻿using Standard.Framework.Seedworks.Events.Concrete;
+﻿using Standard.Framework.Seedworks.Concrete.Events;
 using System.Threading.Tasks;
 
-namespace Standard.Framework.Seedworks.Events.Abstraction
+namespace Standard.Framework.Seedworks.Abstraction.Events
 {
     public interface IIntegrationEventHandler<TEventResponse> where TEventResponse : IntegrationEvent
     {

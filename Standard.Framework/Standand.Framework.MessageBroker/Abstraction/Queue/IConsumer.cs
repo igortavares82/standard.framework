@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
 using Standand.Framework.MessageBroker.Concrete.Options;
-using Standard.Framework.Seedworks.Events.Abstraction;
-using Standard.Framework.Seedworks.Events.Concrete;
+using Standard.Framework.Seedworks.Abstraction.Events;
+using Standard.Framework.Seedworks.Concrete.Events;
 using System;
 using System.Threading.Tasks;
 

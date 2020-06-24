@@ -5,8 +5,8 @@ using RabbitMQ.Client;
 using Standand.Framework.MessageBroker.Abstraction;
 using Standand.Framework.MessageBroker.Abstraction.Queue;
 using Standand.Framework.MessageBroker.Concrete.Options;
-using Standard.Framework.Seedworks.Events.Abstraction;
-using Standard.Framework.Seedworks.Events.Concrete;
+using Standard.Framework.Seedworks.Abstraction.Events;
+using Standard.Framework.Seedworks.Concrete.Events;
 using System;
 using System.Threading.Tasks;
 

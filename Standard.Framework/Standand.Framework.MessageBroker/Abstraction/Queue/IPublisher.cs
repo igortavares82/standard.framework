@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
 using Standand.Framework.MessageBroker.Concrete.Options;
-using Standard.Framework.Seedworks.Events.Abstraction;
-using Standard.Framework.Seedworks.Events.Concrete;
+using Standard.Framework.Seedworks.Abstraction.Events;
+using Standard.Framework.Seedworks.Concrete.Events;
 using System;
 using System.Threading.Tasks;
 
@@ -22,9 +22,8 @@ namespace Standand.Framework.MessageBroker.Abstraction.Queue
         /// <param name="configureScope">Configuração de escopo de objetos que deverão ser injetados.</param>
         /// <param name="options">Opções de fila.</param>
         Task SubscribeAsync<TRequestEvent, TIntegrationEventHandler>(IComponentContext context,
-                                                                         Action<ContainerBuilder, IConfiguration> configureScope,
-                                                                         QueueOptions options = null) where TRequestEvent : IntegrationEvent
-                                                                                                      where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent>;
-
+                                                                     Action<ContainerBuilder, IConfiguration> configureScope,
+                                                                     QueueOptions options = null) where TRequestEvent : IntegrationEvent
+                                                                                                  where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent>;
     }
 }

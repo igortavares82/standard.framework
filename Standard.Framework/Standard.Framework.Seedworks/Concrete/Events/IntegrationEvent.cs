@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Standard.Framework.Seedworks.Events.Concrete
+namespace Standard.Framework.Seedworks.Concrete.Events
 {
     public class IntegrationEvent
     {

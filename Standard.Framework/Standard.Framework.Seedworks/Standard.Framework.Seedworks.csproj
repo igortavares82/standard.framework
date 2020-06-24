@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domains\Concrete\" />
+    <Compile Remove="Abstraction\Domains\Concrete\**" />
+    <EmbeddedResource Remove="Abstraction\Domains\Concrete\**" />
+    <None Remove="Abstraction\Domains\Concrete\**" />
   </ItemGroup>
 
   <ItemGroup>

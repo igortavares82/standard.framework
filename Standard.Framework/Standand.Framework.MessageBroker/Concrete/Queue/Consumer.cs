@@ -7,8 +7,8 @@ using Standand.Framework.MessageBroker.Abstraction;
 using Standand.Framework.MessageBroker.Abstraction.Queue;
 using Standand.Framework.MessageBroker.Concrete.Options;
 using Standand.Framework.MessageBroker.Concrete.Serializers;
-using Standard.Framework.Seedworks.Events.Abstraction;
-using Standard.Framework.Seedworks.Events.Concrete;
+using Standard.Framework.Seedworks.Abstraction.Events;
+using Standard.Framework.Seedworks.Concrete.Events;
 using System;
 using System.Threading.Tasks;
 
@@ -24,7 +24,7 @@ namespace Standand.Framework.MessageBroker.Concrete.Queue
         public async Task SubscribeAsync<TRequestEvent, TIntegrationEventHandler>(IComponentContext context, 
                                                                             Action<ContainerBuilder, IConfiguration> configureScope, 
                                                                             QueueOptions options = null) where TRequestEvent : IntegrationEvent
-                                                                                                                                                                                             where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent>
+                                                                                                         where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent>
         {
             Tuple<string, EventingBasicConsumer> channelData = BuildChannel(options);
             ILifetimeScope rootScope = null;
