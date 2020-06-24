@@ -11,3 +11,5 @@ Standard.Framework/Standard.Framework.Seedworks/obj/project.assets.json
 Standard.Framework/Standard.Framework.Seedworks/obj/Standard.Framework.Seedworks.csproj.nuget.g.props
 Standard.Framework/Standard.Framework.Seedworks/obj/Standard.Framework.Seedworks.csproj.nuget.g.targets
 Standard.Framework/Standard.Framework.Seedworks/obj/Debug/netstandard2.0/Standard.Framework.Seedworks.AssemblyInfo.cs
+/Standard.Framework/Standand.Framework.MessageBroker/bin/Debug/netstandard2.0
+/Standard.Framework/Standand.Framework.MessageBroker/obj
