@@ -1,8 +1,0 @@
-C:\projects\stone\stone.framework\Stone.Framework.Message\bin\Debug\netstandard2.0\Stone.Framework.Message.deps.json
-C:\projects\stone\stone.framework\Stone.Framework.Message\bin\Debug\netstandard2.0\Stone.Framework.Message.dll
-C:\projects\stone\stone.framework\Stone.Framework.Message\bin\Debug\netstandard2.0\Stone.Framework.Message.pdb
-C:\projects\stone\stone.framework\Stone.Framework.Message\obj\Debug\netstandard2.0\Stone.Framework.Message.csproj.CoreCompileInputs.cache
-C:\projects\stone\stone.framework\Stone.Framework.Message\obj\Debug\netstandard2.0\Stone.Framework.Message.AssemblyInfoInputs.cache
-C:\projects\stone\stone.framework\Stone.Framework.Message\obj\Debug\netstandard2.0\Stone.Framework.Message.AssemblyInfo.cs
-C:\projects\stone\stone.framework\Stone.Framework.Message\obj\Debug\netstandard2.0\Stone.Framework.Message.dll
-C:\projects\stone\stone.framework\Stone.Framework.Message\obj\Debug\netstandard2.0\Stone.Framework.Message.pdb
