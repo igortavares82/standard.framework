@@ -16,4 +16,9 @@
     <ProjectReference Include="..\Standard.Framework.Seedworks\Standard.Framework.Seedworks.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstraction\RemoteProcedureCall\" />
+    <Folder Include="Concrete\RemoteProcedureCall\" />
+  </ItemGroup>
+
 </Project>

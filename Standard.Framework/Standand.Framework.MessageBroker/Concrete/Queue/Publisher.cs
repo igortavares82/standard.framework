@@ -1,13 +1,13 @@
 ﻿using Autofac;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using Standand.Framework.MessageBroker.Abstraction;
 using Standand.Framework.MessageBroker.Abstraction.Queue;
 using Standand.Framework.MessageBroker.Concrete.Options;
-using Standard.Framework.Seedworks.Abstraction.Events;
+using Standand.Framework.MessageBroker.Concrete.Serializers;
 using Standard.Framework.Seedworks.Concrete.Events;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Standand.Framework.MessageBroker.Concrete.Queue
@@ -19,12 +19,20 @@ namespace Standand.Framework.MessageBroker.Concrete.Queue
             Init();
         }
 
-        public Task SubscribeAsync<TRequestEvent, TIntegrationEventHandler>(IComponentContext context, 
-                                                                            Action<ContainerBuilder, IConfiguration> configureScope, 
-                                                                            QueueOptions options = null) where TRequestEvent : IntegrationEvent
-                                                                                                         where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent>
+        public async Task PublishAsync<TRequestEvetn>(TRequestEvetn request, IComponentContext context, QueueOptions options = null) where TRequestEvetn : IntegrationEvent
         {
-            throw new NotImplementedException();
+            MessageSerializer serializaer = new MessageSerializer();
+            await PublishAsync(serializaer.Serialize(request), options);
+        }
+
+        public async Task PublishAsync(List<byte[]> messages, QueueOptions options = null)
+        {
+            if (options == null && QueueOptions == null)
+                throw new ArgumentNullException("Queue options cannot be null.");
+
+            QueueOptions qo = options ?? QueueOptions;
+            Channel.QueueDeclare(qo.Queue, qo.Durable, qo.Exclusive, qo.AutoDelete, null);
+            await Task.Run(() => messages.ForEach(it => Channel.BasicPublish("", qo.Queue, true, null, it)));
         }
     }
 }

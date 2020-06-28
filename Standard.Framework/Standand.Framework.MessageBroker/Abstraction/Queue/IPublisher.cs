@@ -1,9 +1,6 @@
 ﻿using Autofac;
-using Microsoft.Extensions.Configuration;
 using Standand.Framework.MessageBroker.Concrete.Options;
-using Standard.Framework.Seedworks.Abstraction.Events;
 using Standard.Framework.Seedworks.Concrete.Events;
-using System;
 using System.Threading.Tasks;
 
 namespace Standand.Framework.MessageBroker.Abstraction.Queue
@@ -14,16 +11,12 @@ namespace Standand.Framework.MessageBroker.Abstraction.Queue
     public interface IPublisher
     {
         /// <summary>
-        /// Assinatura de um determinado evento.
+        /// Publicação de mensagem unitária no barramento.
         /// </summary>
-        /// <typeparam name="TIntegrationEventHandler">Tipo do evento assinado.</typeparam>
-        /// <typeparam name="TRequestEvent">Tipo de tratamento do evento.</typeparam>
-        /// <param name="context">Contexto raiz do injetor dse dependência.</param>
-        /// <param name="configureScope">Configuração de escopo de objetos que deverão ser injetados.</param>
-        /// <param name="options">Opções de fila.</param>
-        Task SubscribeAsync<TRequestEvent, TIntegrationEventHandler>(IComponentContext context,
-                                                                     Action<ContainerBuilder, IConfiguration> configureScope,
-                                                                     QueueOptions options = null) where TRequestEvent : IntegrationEvent
-                                                                                                  where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent>;
+        /// <typeparam name="TRequestEvent"></typeparam>
+        /// <param name="request">Mensagem a ser enviada, a qual será serializada em json antes do envio.</param>
+        /// <param name="context">Contexto do injetor de dependência.</param>
+        /// <param name="options">Possibilidade de sobrescrever as configurações de instância.</param>
+        Task PublishAsync<TRequestEvent>(TRequestEvent request, IComponentContext context, QueueOptions options = null) where TRequestEvent : IntegrationEvent;
     }
 }

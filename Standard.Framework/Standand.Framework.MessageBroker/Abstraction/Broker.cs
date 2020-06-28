@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using Standand.Framework.MessageBroker.Concrete.Options;
+using Standand.Framework.MessageBroker.Concrete.Factories;
 using System;
 
 namespace Standand.Framework.MessageBroker.Abstraction
@@ -27,13 +28,7 @@ namespace Standand.Framework.MessageBroker.Abstraction
 
         protected virtual void Init()
         {
-            Factory = new ConnectionFactory()
-            {
-                HostName = BrokerOptions.HostName,
-                Port = BrokerOptions.Port ?? AmqpTcpEndpoint.UseDefaultPort,
-                //Protocol = Protocols.DefaultProtocol,
-                VirtualHost = BrokerOptions.VirtualHost,
-            };
+            Factory = BrokerMessageConnectionFactory.CreateConnection(BrokerOptions);
 
             if (!string.IsNullOrEmpty(BrokerOptions.UserName))
                 Factory.UserName = BrokerOptions.UserName;

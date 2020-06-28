@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Standard.Framework.Seedworks", "Standard.Framework.Seedworks\Standard.Framework.Seedworks.csproj", "{17760E06-C503-4236-9B7F-7442AD8AC399}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Standand.Framework.MessageBroker", "Standand.Framework.MessageBroker\Standand.Framework.MessageBroker.csproj", "{77369139-B481-40AF-9A35-3D55569F01AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Standand.Framework.MessageBroker", "Standand.Framework.MessageBroker\Standand.Framework.MessageBroker.csproj", "{77369139-B481-40AF-9A35-3D55569F01AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Standard.Framework.Result", "Standard.Framework.Result\Standard.Framework.Result.csproj", "{1702C17F-00A3-4C1E-BEEB-89F7D7904B6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{77369139-B481-40AF-9A35-3D55569F01AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77369139-B481-40AF-9A35-3D55569F01AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77369139-B481-40AF-9A35-3D55569F01AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1702C17F-00A3-4C1E-BEEB-89F7D7904B6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1702C17F-00A3-4C1E-BEEB-89F7D7904B6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1702C17F-00A3-4C1E-BEEB-89F7D7904B6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1702C17F-00A3-4C1E-BEEB-89F7D7904B6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

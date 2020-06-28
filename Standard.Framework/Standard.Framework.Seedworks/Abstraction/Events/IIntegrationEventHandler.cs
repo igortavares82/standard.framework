@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 
 namespace Standard.Framework.Seedworks.Abstraction.Events
 {
-    public interface IIntegrationEventHandler<TEventResponse> where TEventResponse : IntegrationEvent
+    public interface IIntegrationEventHandler<TResponseEvent> where TResponseEvent : IntegrationEvent
     {
-        Task<TEventResponse> Handle(TEventResponse @event);
+        Task<TResponseEvent> Handle(TResponseEvent @event);
     }
 
-    public interface IIntegrationEventHandler<TEventRequest, TEventResponse> where TEventRequest : IntegrationEvent
-                                                                             where TEventResponse : IntegrationEvent
+    public interface IIntegrationEventHandler<TRequestEvent, TResponseEvent> where TRequestEvent : IntegrationEvent
+                                                                             where TResponseEvent : IntegrationEvent
     {
-        Task<TEventResponse> Handle(TEventRequest @event);
+        Task<TResponseEvent> Handle(TRequestEvent @event);
     }
 }

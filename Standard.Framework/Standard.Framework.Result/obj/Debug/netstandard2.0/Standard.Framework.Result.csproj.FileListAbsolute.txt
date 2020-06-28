@@ -1,0 +1,5 @@
+C:\projects\Standard.Framework\Standard.Framework\Standard.Framework.Result\bin\Debug\netstandard2.0\Standard.Framework.Result.deps.json
+C:\projects\Standard.Framework\Standard.Framework\Standard.Framework.Result\bin\Debug\netstandard2.0\Standard.Framework.Result.dll
+C:\projects\Standard.Framework\Standard.Framework\Standard.Framework.Result\obj\Debug\netstandard2.0\Standard.Framework.Result.AssemblyInfoInputs.cache
+C:\projects\Standard.Framework\Standard.Framework\Standard.Framework.Result\obj\Debug\netstandard2.0\Standard.Framework.Result.AssemblyInfo.cs
+C:\projects\Standard.Framework\Standard.Framework\Standard.Framework.Result\obj\Debug\netstandard2.0\Standard.Framework.Result.csprojAssemblyReference.cache
