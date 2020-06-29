@@ -2,12 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Igor Tavares Barata</Authors>
+    <Description>Pacote base para modelagem de domínio.</Description>
+    <PackageTags>Seedworks; Domain; Model; AggregateRoot</PackageTags>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>licença.txt</PackageLicenseFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>lib\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Abstraction\Domains\Concrete\**" />
+    <Compile Remove="lib\**" />
     <EmbeddedResource Remove="Abstraction\Domains\Concrete\**" />
+    <EmbeddedResource Remove="lib\**" />
     <None Remove="Abstraction\Domains\Concrete\**" />
+    <None Remove="lib\**" />
+    <None Include="..\licença.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
