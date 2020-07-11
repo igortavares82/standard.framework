@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\projects\\Standard.Framework\\Standard.Framework\\Standard.Framework.Result\\Standard.Framework.Result.csproj": {}
+    "C:\\Projects\\standard.framework\\Standard.Framework\\Standard.Framework.Result\\Standard.Framework.Result.csproj": {}
   },
   "projects": {
-    "C:\\projects\\Standard.Framework\\Standard.Framework\\Standard.Framework.Result\\Standard.Framework.Result.csproj": {
-      "version": "1.0.0",
+    "C:\\Projects\\standard.framework\\Standard.Framework\\Standard.Framework.Result\\Standard.Framework.Result.csproj": {
+      "version": "1.1.0",
       "restore": {
-        "projectUniqueName": "C:\\projects\\Standard.Framework\\Standard.Framework\\Standard.Framework.Result\\Standard.Framework.Result.csproj",
+        "projectUniqueName": "C:\\Projects\\standard.framework\\Standard.Framework\\Standard.Framework.Result\\Standard.Framework.Result.csproj",
         "projectName": "Standard.Framework.Result",
-        "projectPath": "C:\\projects\\Standard.Framework\\Standard.Framework\\Standard.Framework.Result\\Standard.Framework.Result.csproj",
-        "packagesPath": "C:\\Users\\igorm\\.nuget\\packages\\",
-        "outputPath": "C:\\projects\\Standard.Framework\\Standard.Framework\\Standard.Framework.Result\\obj\\",
+        "projectPath": "C:\\Projects\\standard.framework\\Standard.Framework\\Standard.Framework.Result\\Standard.Framework.Result.csproj",
+        "packagesPath": "C:\\Users\\Igor\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\standard.framework\\Standard.Framework\\Standard.Framework.Result\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\igorm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Igor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

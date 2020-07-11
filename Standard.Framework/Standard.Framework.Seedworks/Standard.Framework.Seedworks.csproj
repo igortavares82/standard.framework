@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Igor Tavares Barata</Authors>
-    <Description>Pacote base para modelagem de domínio.</Description>
+    <Description>Basic package for domain modeling</Description>
     <PackageTags>Seedworks; Domain; Model; AggregateRoot</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>licença.txt</PackageLicenseFile>
