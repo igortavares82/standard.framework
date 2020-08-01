@@ -30,6 +30,7 @@ namespace Standand.Framework.MessageBroker.Concrete
             Context = context;
             BrokerOptions = options;
             Factory = BrokerMessageConnectionFactory.CreateConnection(BrokerOptions.Value);
+            Connection = Factory.CreateConnection();
             Channel = Connection.CreateModel();
             ConfigureScope = configureScope;
         }

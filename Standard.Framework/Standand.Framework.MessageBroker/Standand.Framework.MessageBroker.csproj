@@ -4,9 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Igor Tavares Barata</Authors>
-    <Description>Basic package for service communication through event bus.</Description>
+    <Description>Basic package for service com3munication through event bus.</Description>
     <PackageTags>Event bus; Event; Message; Message broker;</PackageTags>
     <PackageLicenseFile>licença.txt</PackageLicenseFile>
+    <Version>1.1.8</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -23,6 +23,6 @@ namespace Standand.Framework.MessageBroker.Abstraction.RemoteProcedureCall
         /// <param name="options">Opções de chamada.</param>
         /// <returns>Retorno da chamada</returns>
         Task<TResponseEvent> CallAsync<TRequestEvent, TResponseEvent>(TRequestEvent request, IComponentContext context, QueueOptions options) where TRequestEvent : IntegrationEvent
-                                                                                                                                              where TResponseEvent : IntegrationEvent
+                                                                                                                                              where TResponseEvent : IntegrationEvent;
     }
 }

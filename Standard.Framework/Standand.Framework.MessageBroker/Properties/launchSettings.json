@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Standand.Framework.MessageBroker": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
