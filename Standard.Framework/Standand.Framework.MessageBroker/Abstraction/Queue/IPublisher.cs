@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Standand.Framework.MessageBroker.Concrete.Options;
 using Standard.Framework.Seedworks.Concrete.Events;
+using System;
 using System.Threading.Tasks;
 
 namespace Standand.Framework.MessageBroker.Abstraction.Queue
@@ -8,7 +9,7 @@ namespace Standand.Framework.MessageBroker.Abstraction.Queue
     /// <summary>
     /// Componente responsável por consumir eventos (mensagens) do barramento. Comunicação em modo assíncrono.
     /// </summary>
-    public interface IPublisher
+    public interface IPublisher : IDisposable
     {
         /// <summary>
         /// Publicação de mensagem unitária no barramento.

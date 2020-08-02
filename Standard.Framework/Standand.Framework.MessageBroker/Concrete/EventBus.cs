@@ -4,9 +4,11 @@ using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using Standand.Framework.MessageBroker.Abstraction;
 using Standand.Framework.MessageBroker.Abstraction.Queue;
+using Standand.Framework.MessageBroker.Abstraction.RemoteProcedureCall;
+using Standand.Framework.MessageBroker.Concrete.Factories;
 using Standand.Framework.MessageBroker.Concrete.Options;
 using Standand.Framework.MessageBroker.Concrete.Queue;
-using Standand.Framework.MessageBroker.Concrete.Factories;
+using Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall;
 using Standard.Framework.Seedworks.Abstraction.Events;
 using Standard.Framework.Seedworks.Concrete.Events;
 using System;
@@ -46,6 +48,23 @@ namespace Standand.Framework.MessageBroker.Concrete
         {
             IConsumer consumer = new Consumer(BrokerOptions, Factory, Connection, Channel);
             await consumer.SubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>(Context, ConfigureScope, options);
+        }
+
+        public async Task SubscribeAsync<TRequestEvent, TResponseEvent, TIntegrationEventHandler>(QueueOptions options) where TRequestEvent : IntegrationEvent
+                                                                                                                        where TResponseEvent : IntegrationEvent
+                                                                                                                        where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent, TResponseEvent>
+        {
+            IServer server = new Server(BrokerOptions, Factory, Connection, Channel);
+            await server.CallHandlerAsync<TRequestEvent, TResponseEvent, TIntegrationEventHandler>(Context, ConfigureScope, options);
+        }
+
+        public async Task<TResponseEvent> CallAsync<TRequestEvent, TResponseEvent>(TRequestEvent request, QueueOptions options) where TRequestEvent : IntegrationEvent
+                                                                                                                                where TResponseEvent : IntegrationEvent
+        {
+            using (IClient client = new Client(BrokerOptions, Factory, Connection, Channel)) 
+            {
+                return await client.CallAsync<TRequestEvent, TResponseEvent>(request, Context, options);
+            }
         }
     }
 }

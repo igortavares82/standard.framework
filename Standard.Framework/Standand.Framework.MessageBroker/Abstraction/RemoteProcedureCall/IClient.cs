@@ -2,8 +2,6 @@
 using Standand.Framework.MessageBroker.Concrete.Options;
 using Standard.Framework.Seedworks.Concrete.Events;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Standand.Framework.MessageBroker.Abstraction.RemoteProcedureCall
@@ -11,7 +9,7 @@ namespace Standand.Framework.MessageBroker.Abstraction.RemoteProcedureCall
     /// <summary>
     /// Componente responsável por realizar chamadas síncronas a um determinado servidor.
     /// </summary>
-    public interface IClient
+    public interface IClient : IDisposable
     {
         /// <summary>
         /// Executar uma chamada ao servidor em duas vias, com retorno conforme tipo esperado.

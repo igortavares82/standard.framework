@@ -34,5 +34,11 @@ namespace Standand.Framework.MessageBroker.Concrete.Queue
             Channel.QueueDeclare(qo.Queue, qo.Durable, qo.Exclusive, qo.AutoDelete, null);
             await Task.Run(() => messages.ForEach(it => Channel.BasicPublish("", qo.Queue, true, null, it)));
         }
+
+        public void Dispose()
+        {
+            base.Channel.Close();
+            base.Connection.Close();
+        }
     }
 }

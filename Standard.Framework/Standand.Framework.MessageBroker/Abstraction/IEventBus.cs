@@ -11,5 +11,12 @@ namespace Standand.Framework.MessageBroker.Abstraction
 
         Task SubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>(QueueOptions options) where TIntegrationEvent : IntegrationEvent
                                                                                                where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>;
+
+        Task SubscribeAsync<TRequestEvent, TResponseEvent, TIntegrationEventHandler>(QueueOptions options) where TRequestEvent : IntegrationEvent
+                                                                                                           where TResponseEvent : IntegrationEvent
+                                                                                                           where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent, TResponseEvent>;
+
+        Task<TResponseEvent> CallAsync<TRequestEvetn, TResponseEvent>(TRequestEvetn request, QueueOptions options) where TRequestEvetn : IntegrationEvent
+                                                                                                                   where TResponseEvent : IntegrationEvent;
     }
 }

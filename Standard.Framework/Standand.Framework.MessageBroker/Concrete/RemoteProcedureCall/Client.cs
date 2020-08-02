@@ -18,7 +18,7 @@ namespace Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall
     {
         public Client(IOptions<BrokerOptions> brokerOptions, ConnectionFactory factory, IConnection connection, IModel channel) : base(brokerOptions, factory, connection, channel)
         {
-            Init();
+            //Init();
         }
 
         public async Task<TResponseEvent> CallAsync<TRequestEvent, TResponseEvent>(TRequestEvent request, IComponentContext context, QueueOptions options) where TRequestEvent : IntegrationEvent
@@ -72,6 +72,12 @@ namespace Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall
             response = respQueue.Take();
 
             return response;
+        }
+
+        public void Dispose()
+        {
+            base.Channel.Close();
+            base.Connection.Close();
         }
     }
 }
