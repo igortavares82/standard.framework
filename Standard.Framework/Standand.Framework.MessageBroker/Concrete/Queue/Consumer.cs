@@ -18,7 +18,7 @@ namespace Standand.Framework.MessageBroker.Concrete.Queue
     {
         public Consumer(IOptions<BrokerOptions> brokerOptions, ConnectionFactory factory, IConnection connection, IModel channel) : base(brokerOptions, factory, connection, channel)
         {
-            Init();
+            //Init();
         }
 
         public async Task SubscribeAsync<TRequestEvent, TIntegrationEventHandler>(IComponentContext context, 

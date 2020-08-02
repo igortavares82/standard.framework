@@ -16,7 +16,7 @@ namespace Standand.Framework.MessageBroker.Concrete.Queue
     {
         public Publisher(IOptions<BrokerOptions> brokerOptions, ConnectionFactory factory, IConnection connection, IModel channel) : base(brokerOptions, factory, connection, channel)
         {
-            Init();
+            //Init();
         }
 
         public async Task PublishAsync<TRequestEvetn>(TRequestEvetn request, IComponentContext context, QueueOptions options = null) where TRequestEvetn : IntegrationEvent

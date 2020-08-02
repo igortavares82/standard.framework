@@ -11,9 +11,8 @@ namespace Standand.Framework.MessageBroker.Concrete.Factories
             {
                 HostName = options.HostName,
                 Port = AmqpTcpEndpoint.UseDefaultPort,
-                VirtualHost = ConnectionFactory.DefaultVHost,
-                Password = options.Password
-        };
+                VirtualHost = ConnectionFactory.DefaultVHost
+            };
 
             if (!string.IsNullOrEmpty(options.UserName))
                 factory.UserName = options.UserName;
