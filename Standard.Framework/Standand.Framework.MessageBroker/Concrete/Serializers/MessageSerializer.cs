@@ -15,7 +15,7 @@ namespace Standand.Framework.MessageBroker.Concrete.Serializers
         public List<byte[]> Serialize<TEntity>(List<TEntity> messages)
         {
             List<byte[]> result = new List<byte[]>();
-
+            
             result = messages.Select(it =>
             {
                 string message = JsonConvert.SerializeObject(it);
@@ -33,7 +33,7 @@ namespace Standand.Framework.MessageBroker.Concrete.Serializers
 
         public List<TEntity> Deserialize<TEntity>(List<byte[]> messages)
         {
-            List<TEntity> result = new List<TEntity>();
+            List<TEntity> result = null;
 
             result = messages.Select(it =>
             {

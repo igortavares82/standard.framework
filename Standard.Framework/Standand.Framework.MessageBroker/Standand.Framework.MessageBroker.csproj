@@ -7,11 +7,13 @@
     <Description>Basic package for service com3munication through event bus.</Description>
     <PackageTags>Event bus; Event; Message; Message broker;</PackageTags>
     <PackageLicenseFile>licença.txt</PackageLicenseFile>
-    <Version>1.1.11</Version>
+    <Version>1.1.14</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>lib\</OutputPath>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

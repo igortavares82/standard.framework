@@ -24,17 +24,12 @@ namespace Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall
         public async Task<TResponseEvent> CallAsync<TRequestEvent, TResponseEvent>(TRequestEvent request, IComponentContext context, QueueOptions options) where TRequestEvent : IntegrationEvent
                                                                                                                                                            where TResponseEvent : IntegrationEvent
         {
-            TResponseEvent response = null;
-
             MessageSerializer serializaer = new MessageSerializer();
-            IConfiguration configuration = context.Resolve<IConfiguration>();
 
             byte[] byteRequest = serializaer.Serialize(request)[0];
             byte[] byteResponse = await CallAsync(byteRequest, options);
 
-            response = serializaer.Deserialize<TResponseEvent>(byteResponse)[0];
-
-            return response;
+            return serializaer.Deserialize<TResponseEvent>(byteResponse)[0]; ;
         }
 
         private async Task<byte[]> CallAsync(byte[] message, QueueOptions options)

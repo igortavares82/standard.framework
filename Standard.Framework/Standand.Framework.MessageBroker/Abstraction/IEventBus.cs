@@ -16,7 +16,7 @@ namespace Standand.Framework.MessageBroker.Abstraction
                                                                                                            where TResponseEvent : IntegrationEvent
                                                                                                            where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent, TResponseEvent>;
 
-        Task<TResponseEvent> CallAsync<TRequestEvetn, TResponseEvent>(TRequestEvetn request, QueueOptions options) where TRequestEvetn : IntegrationEvent
+        Task<TResponseEvent> CallAsync<TRequestEvent, TResponseEvent>(TRequestEvent request, QueueOptions options) where TRequestEvent : IntegrationEvent
                                                                                                                    where TResponseEvent : IntegrationEvent;
     }
 }

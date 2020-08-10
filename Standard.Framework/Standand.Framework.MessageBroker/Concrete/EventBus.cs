@@ -12,6 +12,7 @@ using Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall;
 using Standard.Framework.Seedworks.Abstraction.Events;
 using Standard.Framework.Seedworks.Concrete.Events;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Standand.Framework.MessageBroker.Concrete
@@ -24,6 +25,7 @@ namespace Standand.Framework.MessageBroker.Concrete
         private IConnection Connection { get; }
         private IModel Channel { get; }
         private Action<ContainerBuilder, IConfiguration> ConfigureScope { get; }
+        private Dictionary<Type, Broker> Brokers { get; } = new Dictionary<Type, Broker>();
 
         public EventBus(IComponentContext context,
                         IOptions<BrokerOptions> options,
@@ -39,14 +41,14 @@ namespace Standand.Framework.MessageBroker.Concrete
 
         public async Task PublishAsync(IntegrationEvent @event, QueueOptions options)
         {
-            IPublisher publisher = new Publisher(BrokerOptions, Factory, Connection, Channel);
+            IPublisher publisher = (IPublisher)ManageBrokers<IPublisher>();
             await publisher.PublishAsync(@event, Context, options);
         }
 
         public async Task SubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>(QueueOptions options) where TIntegrationEvent : IntegrationEvent
                                                                                                             where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>
         {
-            IConsumer consumer = new Consumer(BrokerOptions, Factory, Connection, Channel);
+            IConsumer consumer = (IConsumer)ManageBrokers<IConsumer>();
             await consumer.SubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>(Context, ConfigureScope, options);
         }
 
@@ -54,17 +56,45 @@ namespace Standand.Framework.MessageBroker.Concrete
                                                                                                                         where TResponseEvent : IntegrationEvent
                                                                                                                         where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent, TResponseEvent>
         {
-            IServer server = new Server(BrokerOptions, Factory, Connection, Channel);
+            IServer server = (IServer)ManageBrokers<IServer>();
             await server.CallHandlerAsync<TRequestEvent, TResponseEvent, TIntegrationEventHandler>(Context, ConfigureScope, options);
         }
 
         public async Task<TResponseEvent> CallAsync<TRequestEvent, TResponseEvent>(TRequestEvent request, QueueOptions options) where TRequestEvent : IntegrationEvent
                                                                                                                                 where TResponseEvent : IntegrationEvent
         {
-            using (IClient client = new Client(BrokerOptions, Factory, Connection, Channel)) 
+            IClient client = (IClient)ManageBrokers<IClient>();
+            return await client.CallAsync<TRequestEvent, TResponseEvent>(request, Context, options);
+        }
+
+        private Broker ManageBrokers<TBroker>()
+        {
+            Broker broker = null;
+
+            if (Brokers.ContainsKey(typeof(TBroker)))
+                broker = Brokers[typeof(TBroker)];
+            else
             {
-                return await client.CallAsync<TRequestEvent, TResponseEvent>(request, Context, options);
+                if (typeof(TBroker) == typeof(IPublisher))
+                    broker = new Publisher(BrokerOptions, Factory, Connection, Channel);
+
+                if (typeof(TBroker) == typeof(IConsumer))
+                {
+                    broker = new Consumer(BrokerOptions, Factory, Connection, Channel);
+                    Brokers.Add(typeof(TBroker), broker);
+                }
+
+                if (typeof(TBroker) == typeof(IClient))
+                    broker = new Client(BrokerOptions, Factory, Connection, Channel);
+
+                if (typeof(TBroker) == typeof(IServer))
+                {
+                    broker = new Server(BrokerOptions, Factory, Connection, Channel);
+                    Brokers.Add(typeof(TBroker), broker);
+                }
             }
+
+            return broker;
         }
     }
 }

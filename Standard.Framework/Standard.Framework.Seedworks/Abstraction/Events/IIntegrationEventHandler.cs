@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace Standard.Framework.Seedworks.Abstraction.Events
 {
-    public interface IIntegrationEventHandler<TResponseEvent> where TResponseEvent : IntegrationEvent
+    public interface IIntegrationEventHandler<TRequestEvent> where TRequestEvent : IntegrationEvent
     {
-        Task<TResponseEvent> Handle(TResponseEvent @event);
+        Task Handle(TRequestEvent @event);
     }
 
     public interface IIntegrationEventHandler<TRequestEvent, TResponseEvent> where TRequestEvent : IntegrationEvent

@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Standand.Framework.MessageBroker.Abstraction;
@@ -11,7 +10,6 @@ using Standand.Framework.MessageBroker.Concrete.Serializers;
 using Standard.Framework.Seedworks.Abstraction.Events;
 using Standard.Framework.Seedworks.Concrete.Events;
 using System;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall
@@ -31,7 +29,6 @@ namespace Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall
             {
                 TRequest request = null;
                 ILifetimeScope rootScope = context.Resolve<ILifetimeScope>();
-                IConfiguration configuration = rootScope.Resolve<IConfiguration>();
 
                 using (ILifetimeScope innerScope = rootScope.BeginLifetimeScope(Guid.NewGuid().ToString(), (config) => configureScope(config, context.Resolve<IConfiguration>())))
                 {
@@ -49,33 +46,6 @@ namespace Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall
                     TResponse response = await handler.Handle(request);
 
                     Channel.BasicPublish("", props.ReplyTo, replyProps, serializaer.Serialize(response)[0]);
-                    Channel.BasicAck(args.DeliveryTag, false);
-                }
-            };
-        }
-
-        public async Task CallHandlerAsync<TResponse>(IComponentContext context, 
-                                                      Action<ContainerBuilder, IConfiguration> configureScope, 
-                                                      QueueOptions options) where TResponse : IntegrationEvent
-        {
-            EventingBasicConsumer consumer = BuildChannel(options);
-            ILifetimeScope rootScope = context.Resolve<ILifetimeScope>();
-            IConfiguration configuration = rootScope.Resolve<IConfiguration>();
-
-            consumer.Received += async (model, args) =>
-            {
-                using (ILifetimeScope innerScope = rootScope.BeginLifetimeScope(Guid.NewGuid().ToString(), (config) => configureScope(config, context.Resolve<IConfiguration>())))
-                {
-                    MessageSerializer serializaer = new MessageSerializer();
-                    IBasicProperties props = args.BasicProperties;
-                    IBasicProperties replyProps = Channel.CreateBasicProperties();
-                    replyProps.CorrelationId = props.CorrelationId;
-
-                    IIntegrationEventHandler<TResponse> handler = innerScope.Resolve<IIntegrationEventHandler<TResponse>>();
-                    TResponse response = await handler.Handle(null);
-                    string json = JsonConvert.SerializeObject(response);
-
-                    Channel.BasicPublish("", props.ReplyTo, replyProps, Encoding.UTF8.GetBytes(json));
                     Channel.BasicAck(args.DeliveryTag, false);
                 }
             };

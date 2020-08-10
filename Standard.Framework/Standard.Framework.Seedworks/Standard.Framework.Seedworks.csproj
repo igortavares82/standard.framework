@@ -8,6 +8,7 @@
     <PackageTags>Seedworks; Domain; Model; AggregateRoot</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>licença.txt</PackageLicenseFile>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

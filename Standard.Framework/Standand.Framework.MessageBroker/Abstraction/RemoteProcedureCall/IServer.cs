@@ -23,17 +23,5 @@ namespace Standand.Framework.MessageBroker.Abstraction.RemoteProcedureCall
                                                                              Action<ContainerBuilder, IConfiguration> configureScope,
                                                                              QueueOptions options) where TRequest : IntegrationEvent
                                                                                                    where TResponse : IntegrationEvent;
-
-        /// <summary>
-        /// Recebe chamadas do cliente e retorna uma resposta, sem receber parâmetro.
-        /// </summary>
-        /// <typeparam name="TResponse">Tipo da mensagem de resposta.</typeparam>
-        /// <param name="context">Contexto raiz do injetor dse dependência.</param>
-        /// <param name="configureScope">Configuração de escopo de objetos que deverão ser injetados.</param>
-        /// <param name="options">Opções de fila.</param>
-        /// <returns>Mensagem de retorno.</returns>
-        Task CallHandlerAsync<TResponse>(IComponentContext context,
-                                         Action<ContainerBuilder, IConfiguration> configureScope,
-                                         QueueOptions options) where TResponse : IntegrationEvent;
     }
 }
