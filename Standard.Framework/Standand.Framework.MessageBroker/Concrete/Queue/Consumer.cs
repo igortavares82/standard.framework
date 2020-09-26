@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;

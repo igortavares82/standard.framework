@@ -76,7 +76,10 @@ namespace Standand.Framework.MessageBroker.Concrete
             else
             {
                 if (typeof(TBroker) == typeof(IPublisher))
+                { 
                     broker = new Publisher(BrokerOptions, Factory, Connection, Channel);
+                    Brokers.Add(typeof(TBroker), broker);
+                }
 
                 if (typeof(TBroker) == typeof(IConsumer))
                 {
@@ -84,8 +87,11 @@ namespace Standand.Framework.MessageBroker.Concrete
                     Brokers.Add(typeof(TBroker), broker);
                 }
 
-                if (typeof(TBroker) == typeof(IClient))
+                if (typeof(TBroker) == typeof(IClient)) 
+                {
                     broker = new Client(BrokerOptions, Factory, Connection, Channel);
+                    Brokers.Add(typeof(TBroker), broker);
+                }
 
                 if (typeof(TBroker) == typeof(IServer))
                 {

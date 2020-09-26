@@ -9,7 +9,7 @@ namespace Standand.Framework.MessageBroker.Abstraction.Queue
     /// <summary>
     /// Componente responsável por consumir eventos (mensagens) do barramento. Comunicação em modo assíncrono.
     /// </summary>
-    public interface IPublisher : IDisposable
+    public interface IPublisher
     {
         /// <summary>
         /// Publicação de mensagem unitária no barramento.

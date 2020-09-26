@@ -9,7 +9,7 @@ namespace Standand.Framework.MessageBroker.Abstraction.RemoteProcedureCall
     /// <summary>
     /// Componente responsável por realizar chamadas síncronas a um determinado servidor.
     /// </summary>
-    public interface IClient : IDisposable
+    public interface IClient
     {
         /// <summary>
         /// Executar uma chamada ao servidor em duas vias, com retorno conforme tipo esperado.

@@ -68,11 +68,5 @@ namespace Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall
 
             return response;
         }
-
-        public void Dispose()
-        {
-            base.Channel.Close();
-            base.Connection.Close();
-        }
     }
 }

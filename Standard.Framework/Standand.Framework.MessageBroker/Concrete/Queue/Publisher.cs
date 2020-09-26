@@ -31,14 +31,12 @@ namespace Standand.Framework.MessageBroker.Concrete.Queue
                 throw new ArgumentNullException("Queue options cannot be null.");
 
             QueueOptions qo = options ?? QueueOptions;
-            Channel.QueueDeclare(qo.Queue, qo.Durable, qo.Exclusive, qo.AutoDelete, null);
-            await Task.Run(() => messages.ForEach(it => Channel.BasicPublish("", qo.Queue, true, null, it)));
-        }
 
-        public void Dispose()
-        {
-            base.Channel.Close();
-            base.Connection.Close();
+            using (IModel model = Connection.CreateModel()) 
+            {
+                model.QueueDeclare(qo.Queue, qo.Durable, qo.Exclusive, qo.AutoDelete, null);
+                await Task.Run(() => messages.ForEach(it => model.BasicPublish("", qo.Queue, true, null, it)));
+            }
         }
     }
 }
