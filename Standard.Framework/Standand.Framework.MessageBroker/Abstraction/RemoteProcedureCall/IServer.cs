@@ -19,8 +19,7 @@ namespace Standand.Framework.MessageBroker.Abstraction.RemoteProcedureCall
         /// <param name="configureScope">Configuração de escopo de objetos que deverão ser injetados.</param>
         /// <param name="options"~>Opções de fila.</param>
         /// <returns>Mensagem de retorno.</returns>
-        Task CallHandlerAsync<TRequest, TResponse, TIntegrationEventHandler>(IComponentContext context,
-                                                                             Action<ContainerBuilder, IConfiguration> configureScope,
+        Task CallHandlerAsync<TRequest, TResponse, TIntegrationEventHandler>(ILifetimeScope scope,
                                                                              QueueOptions options) where TRequest : IntegrationEvent
                                                                                                    where TResponse : IntegrationEvent;
     }

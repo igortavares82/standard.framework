@@ -20,12 +20,23 @@ namespace Standand.Framework.MessageBroker.Concrete
     public class EventBus : IEventBus
     {
         private IComponentContext Context { get; }
+        private ILifetimeScope Scope { get; }
         private IOptions<BrokerOptions> BrokerOptions { get; }
         private ConnectionFactory Factory { get; }
         private IConnection Connection { get; }
         private IModel Channel { get; }
         private Action<ContainerBuilder, IConfiguration> ConfigureScope { get; }
         private Dictionary<Type, Broker> Brokers { get; } = new Dictionary<Type, Broker>();
+
+        public EventBus(ILifetimeScope scope,
+                        IOptions<BrokerOptions> options)
+        {
+            Scope = scope;
+            BrokerOptions = options;
+            Factory = BrokerMessageConnectionFactory.CreateConnection(BrokerOptions.Value);
+            Connection = Factory.CreateConnection();
+            Channel = Connection.CreateModel();
+        }
 
         public EventBus(IComponentContext context,
                         IOptions<BrokerOptions> options,
@@ -49,7 +60,7 @@ namespace Standand.Framework.MessageBroker.Concrete
                                                                                                             where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>
         {
             IConsumer consumer = (IConsumer)ManageBrokers<IConsumer>();
-            await consumer.SubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>(Context, ConfigureScope, options);
+            await consumer.SubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>(Scope, options);
         }
 
         public async Task SubscribeAsync<TRequestEvent, TResponseEvent, TIntegrationEventHandler>(QueueOptions options) where TRequestEvent : IntegrationEvent
@@ -57,7 +68,7 @@ namespace Standand.Framework.MessageBroker.Concrete
                                                                                                                         where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent, TResponseEvent>
         {
             IServer server = (IServer)ManageBrokers<IServer>();
-            await server.CallHandlerAsync<TRequestEvent, TResponseEvent, TIntegrationEventHandler>(Context, ConfigureScope, options);
+            await server.CallHandlerAsync<TRequestEvent, TResponseEvent, TIntegrationEventHandler>(Scope, options);
         }
 
         public async Task<TResponseEvent> CallAsync<TRequestEvent, TResponseEvent>(TRequestEvent request, QueueOptions options) where TRequestEvent : IntegrationEvent

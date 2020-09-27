@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Standand.Framework.MessageBroker.Concrete.Serializers
 {
-    public class MessageSerializer
+    public class MessageSerializer : IDisposable
     {
         public List<byte[]> Serialize<TEntity>(TEntity message)
         {
@@ -43,6 +44,12 @@ namespace Standand.Framework.MessageBroker.Concrete.Serializers
             .ToList();
 
             return result;
+        }
+
+        public void Dispose()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
     }
 }
