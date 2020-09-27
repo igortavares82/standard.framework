@@ -21,9 +21,8 @@ namespace Standand.Framework.MessageBroker.Abstraction.Queue
         /// <param name="context">Contexto raiz do injetor dse dependência.</param>
         /// <param name="configureScope">Configuração de escopo de objetos que deverão ser injetados.</param>
         /// <param name="options">Opções de fila.</param>
-        Task SubscribeAsync<TRequestEvent, TIntegrationEventHandler>(IComponentContext context,
-                                                                         Action<ContainerBuilder, IConfiguration> configureScope,
-                                                                         QueueOptions options = null) where TRequestEvent : IntegrationEvent
-                                                                                                      where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent>;        
+        Task SubscribeAsync<TRequestEvent, TIntegrationEventHandler>(ILifetimeScope scope,
+                                                                     QueueOptions options = null) where TRequestEvent : IntegrationEvent
+                                                                                                  where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent>;        
     }
 }

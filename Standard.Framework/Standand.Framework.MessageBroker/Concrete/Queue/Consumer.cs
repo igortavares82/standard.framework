@@ -21,23 +21,19 @@ namespace Standand.Framework.MessageBroker.Concrete.Queue
             //Init();
         }
 
-        public async Task SubscribeAsync<TRequestEvent, TIntegrationEventHandler>(IComponentContext context, 
-                                                                                  Action<ContainerBuilder, IConfiguration> configureScope, 
+        public async Task SubscribeAsync<TRequestEvent, TIntegrationEventHandler>(ILifetimeScope scope, 
                                                                                   QueueOptions options = null) where TRequestEvent : IntegrationEvent
                                                                                                                where TIntegrationEventHandler : IIntegrationEventHandler<TRequestEvent>
         {
             Tuple<string, EventingBasicConsumer> channelData = BuildChannel(options);
-            ILifetimeScope rootScope = context.Resolve<ILifetimeScope>();
 
             channelData.Item2.Received += async (model, args) =>
             {
-                TRequestEvent request = null;
-                using (ILifetimeScope innerScope = rootScope.BeginLifetimeScope(Guid.NewGuid().ToString(), (config) => configureScope(config, context.Resolve<IConfiguration>())))
+                using (ILifetimeScope innerScope = scope.BeginLifetimeScope())
+                using (MessageSerializer serializaer = new MessageSerializer())
+                using (IIntegrationEventHandler<TRequestEvent> handler = innerScope.Resolve<IIntegrationEventHandler<TRequestEvent>>())
                 {
-                    MessageSerializer serializaer = new MessageSerializer();
-                    request = serializaer.Deserialize<TRequestEvent>(args.Body.ToArray())[0];
-
-                    IIntegrationEventHandler<TRequestEvent> handler = innerScope.Resolve<IIntegrationEventHandler<TRequestEvent>>();
+                    TRequestEvent request = serializaer.Deserialize<TRequestEvent>(args.Body.ToArray())[0];
                     await handler.Handle(request);
                 }
             };

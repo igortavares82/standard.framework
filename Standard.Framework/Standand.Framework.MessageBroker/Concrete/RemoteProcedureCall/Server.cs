@@ -18,21 +18,20 @@ namespace Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall
     {
         public Server(IOptions<BrokerOptions> brokerOptions, ConnectionFactory factory, IConnection connection, IModel channel) : base(brokerOptions, factory, connection, channel) { }
 
-        public async Task CallHandlerAsync<TRequest, TResponse, TIntegrationEventHandler>(IComponentContext context, 
-                                                                                    Action<ContainerBuilder, IConfiguration> configureScope, 
-                                                                                    QueueOptions options) where TRequest : IntegrationEvent
-                                                                                                          where TResponse : IntegrationEvent
+        public async Task CallHandlerAsync<TRequest, TResponse, TIntegrationEventHandler>(ILifetimeScope scope, 
+                                                                                          QueueOptions options) where TRequest : IntegrationEvent
+                                                                                                                where TResponse : IntegrationEvent
         {
             EventingBasicConsumer consumer = BuildChannel(options);
 
             consumer.Received += async (model, args) =>
             {
                 TRequest request = null;
-                ILifetimeScope rootScope = context.Resolve<ILifetimeScope>();
 
-                using (ILifetimeScope innerScope = rootScope.BeginLifetimeScope(Guid.NewGuid().ToString(), (config) => configureScope(config, context.Resolve<IConfiguration>())))
+                using (ILifetimeScope innerScope = scope.BeginLifetimeScope())
+                using (MessageSerializer serializaer = new MessageSerializer())
+                using (IIntegrationEventHandler<TRequest, TResponse> handler = innerScope.Resolve<IIntegrationEventHandler<TRequest, TResponse>>())
                 {
-                    MessageSerializer serializaer = new MessageSerializer();
                     IBasicProperties props = args.BasicProperties;
                     IBasicProperties replyProps = Channel.CreateBasicProperties();
                     replyProps.CorrelationId = props.CorrelationId;
@@ -42,7 +41,6 @@ namespace Standand.Framework.MessageBroker.Concrete.RemoteProcedureCall
                     if (args.Body.Length > 0)
                         request = serializaer.Deserialize<TRequest>(args.Body.ToArray())[0];
 
-                    IIntegrationEventHandler<TRequest, TResponse> handler = innerScope.Resolve<IIntegrationEventHandler<TRequest, TResponse>>();
                     TResponse response = await handler.Handle(request);
 
                     Channel.BasicPublish("", props.ReplyTo, replyProps, serializaer.Serialize(response)[0]);
